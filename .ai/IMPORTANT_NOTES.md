@@ -186,4 +186,48 @@ git tag -d v1.1.5 && git push origin --delete v1.1.5 && git tag v1.1.5 && git pu
 
 ---
 
-最后更新: 2026-02-20 19:30
+最后更新: 2026-02-20 20:00
+
+---
+
+## 🚨 AI合规性强制执行系统（2026-02-20新增）
+
+### 四层强制执行机制
+
+项目现在实施了4层强制执行，确保.ai/知识库永远不会被忽视：
+
+#### 第1层：文件标记 
+- **文件**: `.ai/.INIT_REQUIRED`
+- **作用**: 标记.ai/为强制初始化的内容
+- **无需编程**: 仅文件存在即表示强制
+
+#### 第2层：文档说明
+- **更新文件**: `README.md` (新增"🤖 AI Assistant Knowledge Base"部分)
+- **作用**: 对所有用户明确说明规则
+- **何时触发**: clone仓库时可见
+
+#### 第3层：本地Hook
+- **脚本**: `scripts/install-git-hooks.sh`
+- **创建**: `.git/hooks/pre-commit`
+- **作用**: 提交前警告代码修改但.ai/未更新
+- **用法**: `bash scripts/install-git-hooks.sh`
+
+#### 第4层：CI/CD自动化
+- **工作流**: `.github/workflows/enforce-ai-updates.yml`
+- **触发条件**: PR和push到master/main
+- **作用**: 自动检查代码修改是否伴随.ai/更新
+- **失败条件**: 代码改但.ai/未更新 → PR merge失败
+
+### 验证脚本
+- **check-ai-init.sh**: 验证.ai/完整性和初始化状态
+- **用法**: `bash scripts/check-ai-init.sh`
+
+### 详细指南
+参考: `.ai/COMPLIANCE_GUIDE.md` - 完整的四层系统说明和使用指南
+
+### 关键结果
+✅ 新对话无法忽视.ai/（有多道防线）
+✅ 代码修改必然伴随知识库更新
+✅ GitHub自动拒绝不完整的PR
+✅ 项目知识永不丢失
+
