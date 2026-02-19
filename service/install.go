@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/go-sonic/sonic/model/param"
+	"github.com/aaro-n/sonic/model/param"
 )
 
 type InstallService interface {

@@ -3,9 +3,9 @@ package extension
 import (
 	"context"
 
-	"github.com/go-sonic/sonic/model/dto"
-	"github.com/go-sonic/sonic/service"
-	"github.com/go-sonic/sonic/template"
+	"github.com/aaro-n/sonic/model/dto"
+	"github.com/aaro-n/sonic/service"
+	"github.com/aaro-n/sonic/template"
 )
 
 type statisticExtension struct {

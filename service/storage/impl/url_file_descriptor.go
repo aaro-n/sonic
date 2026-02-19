@@ -4,7 +4,7 @@ import (
 	"net/url"
 	"path/filepath"
 
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 type urlFileDescriptor struct {

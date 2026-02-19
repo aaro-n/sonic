@@ -3,9 +3,9 @@ package service
 import (
 	"context"
 
-	"github.com/go-sonic/sonic/consts"
-	"github.com/go-sonic/sonic/model/entity"
-	"github.com/go-sonic/sonic/model/param"
+	"github.com/aaro-n/sonic/consts"
+	"github.com/aaro-n/sonic/model/entity"
+	"github.com/aaro-n/sonic/model/param"
 )
 
 type JournalCommentService interface {

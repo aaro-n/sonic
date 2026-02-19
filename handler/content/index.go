@@ -3,9 +3,9 @@ package content
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/go-sonic/sonic/handler/content/model"
-	"github.com/go-sonic/sonic/template"
-	"github.com/go-sonic/sonic/util"
+	"github.com/aaro-n/sonic/handler/content/model"
+	"github.com/aaro-n/sonic/template"
+	"github.com/aaro-n/sonic/util"
 )
 
 type IndexHandler struct {

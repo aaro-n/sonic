@@ -1,6 +1,6 @@
 package admin
 
-import "github.com/go-sonic/sonic/injection"
+import "github.com/aaro-n/sonic/injection"
 
 func init() {
 	injection.Provide(

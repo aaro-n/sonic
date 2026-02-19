@@ -5,12 +5,12 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/go-sonic/sonic/cache"
-	"github.com/go-sonic/sonic/config"
-	"github.com/go-sonic/sonic/event"
-	"github.com/go-sonic/sonic/model/dto"
-	"github.com/go-sonic/sonic/model/property"
-	"github.com/go-sonic/sonic/service"
+	"github.com/aaro-n/sonic/cache"
+	"github.com/aaro-n/sonic/config"
+	"github.com/aaro-n/sonic/event"
+	"github.com/aaro-n/sonic/model/dto"
+	"github.com/aaro-n/sonic/model/property"
+	"github.com/aaro-n/sonic/service"
 )
 
 type clientOptionServiceImpl struct {

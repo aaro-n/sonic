@@ -11,9 +11,9 @@ import (
 
 	"go.uber.org/fx"
 
-	"github.com/go-sonic/sonic/model/dto"
-	"github.com/go-sonic/sonic/util"
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/model/dto"
+	"github.com/aaro-n/sonic/util"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 type multipartZipThemeFetcherImpl struct {

@@ -3,9 +3,9 @@ package impl
 import (
 	"context"
 
-	"github.com/go-sonic/sonic/consts"
-	"github.com/go-sonic/sonic/model/entity"
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/consts"
+	"github.com/aaro-n/sonic/model/entity"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 func GetAuthorizedUser(ctx context.Context) (*entity.User, bool) {

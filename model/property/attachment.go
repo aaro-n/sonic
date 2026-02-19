@@ -3,7 +3,7 @@ package property
 import (
 	"reflect"
 
-	"github.com/go-sonic/sonic/consts"
+	"github.com/aaro-n/sonic/consts"
 )
 
 var UploadImagePreviewEnable = Property{

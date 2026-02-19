@@ -10,11 +10,11 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 
-	"github.com/go-sonic/sonic/config"
-	"github.com/go-sonic/sonic/consts"
-	sonicLog "github.com/go-sonic/sonic/log"
-	"github.com/go-sonic/sonic/model/entity"
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/config"
+	"github.com/aaro-n/sonic/consts"
+	sonicLog "github.com/aaro-n/sonic/log"
+	"github.com/aaro-n/sonic/model/entity"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 var (

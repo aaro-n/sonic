@@ -4,11 +4,11 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/go-sonic/sonic/model/property"
-	"github.com/go-sonic/sonic/model/vo"
-	"github.com/go-sonic/sonic/service"
-	"github.com/go-sonic/sonic/template"
-	"github.com/go-sonic/sonic/util"
+	"github.com/aaro-n/sonic/model/property"
+	"github.com/aaro-n/sonic/model/vo"
+	"github.com/aaro-n/sonic/service"
+	"github.com/aaro-n/sonic/template"
+	"github.com/aaro-n/sonic/util"
 )
 
 type paginationExtension struct {

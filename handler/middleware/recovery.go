@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
-	"github.com/go-sonic/sonic/model/dto"
+	"github.com/aaro-n/sonic/model/dto"
 )
 
 type RecoveryMiddleware struct {

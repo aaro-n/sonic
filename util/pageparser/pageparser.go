@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/go-sonic/sonic/util/pageparser/metadecoders"
+	"github.com/aaro-n/sonic/util/pageparser/metadecoders"
 )
 
 // Result holds the parse result.

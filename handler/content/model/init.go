@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/go-sonic/sonic/injection"
+	"github.com/aaro-n/sonic/injection"
 )
 
 func init() {

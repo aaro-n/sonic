@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-sonic/sonic/util"
+	"github.com/aaro-n/sonic/util"
 )
 
 var errUnknownType = errors.New("unknown type")

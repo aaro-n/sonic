@@ -3,8 +3,8 @@ package api
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/go-sonic/sonic/service"
-	"github.com/go-sonic/sonic/util"
+	"github.com/aaro-n/sonic/service"
+	"github.com/aaro-n/sonic/util"
 )
 
 type PhotoHandler struct {

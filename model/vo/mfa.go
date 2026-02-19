@@ -1,6 +1,6 @@
 package vo
 
-import "github.com/go-sonic/sonic/consts"
+import "github.com/aaro-n/sonic/consts"
 
 type MFAFactorAuth struct {
 	QRImage    string         `json:"qrImage"`

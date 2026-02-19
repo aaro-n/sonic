@@ -10,11 +10,11 @@ import (
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 
-	"github.com/go-sonic/sonic/consts"
-	"github.com/go-sonic/sonic/model/dto"
-	"github.com/go-sonic/sonic/model/property"
-	"github.com/go-sonic/sonic/service"
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/consts"
+	"github.com/aaro-n/sonic/model/dto"
+	"github.com/aaro-n/sonic/model/property"
+	"github.com/aaro-n/sonic/service"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 type MinIO struct {

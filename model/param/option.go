@@ -1,6 +1,6 @@
 package param
 
-import "github.com/go-sonic/sonic/consts"
+import "github.com/aaro-n/sonic/consts"
 
 type Option struct {
 	Key   string `json:"key" form:"key"`

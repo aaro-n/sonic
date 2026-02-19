@@ -5,9 +5,9 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/go-sonic/sonic/dal"
-	"github.com/go-sonic/sonic/event"
-	"github.com/go-sonic/sonic/model/entity"
+	"github.com/aaro-n/sonic/dal"
+	"github.com/aaro-n/sonic/event"
+	"github.com/aaro-n/sonic/model/entity"
 )
 
 type LogEventListener struct {

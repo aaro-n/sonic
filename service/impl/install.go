@@ -8,15 +8,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-sonic/sonic/consts"
-	"github.com/go-sonic/sonic/dal"
-	"github.com/go-sonic/sonic/event"
-	"github.com/go-sonic/sonic/model/entity"
-	"github.com/go-sonic/sonic/model/param"
-	"github.com/go-sonic/sonic/model/property"
-	"github.com/go-sonic/sonic/service"
-	"github.com/go-sonic/sonic/util"
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/consts"
+	"github.com/aaro-n/sonic/dal"
+	"github.com/aaro-n/sonic/event"
+	"github.com/aaro-n/sonic/model/entity"
+	"github.com/aaro-n/sonic/model/param"
+	"github.com/aaro-n/sonic/model/property"
+	"github.com/aaro-n/sonic/service"
+	"github.com/aaro-n/sonic/util"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 type installServiceImpl struct {
@@ -177,7 +177,7 @@ func (i installServiceImpl) createDefaultPost(ctx context.Context, category *ent
 
 - 官网：[https://github.com/go-sonic](https://github.com/go-sonic)
 - 主题仓库：[https://github.com/go-sonic/default-theme-anatole](https://github.com/go-sonic/default-theme-anatole)
-- 开源地址：[https://github.com/go-sonic/sonic](https://github.com/go-sonic/sonic)
+- 开源地址：[https://github.com/aaro-n/sonic](https://github.com/aaro-n/sonic)
 
 在使用过程中，有任何问题都可以通过以上链接找寻答案，或者联系我们。
 
@@ -189,7 +189,7 @@ func (i installServiceImpl) createDefaultPost(ctx context.Context, category *ent
 	<ul>
 	<li>官网：<a href="https://github.com/go-sonic" target="_blank">https://github.com/go-sonic</a></li>
 	<li>主题仓库：<a href="https://github.com/go-sonic/default-theme-anatole" target="_blank">https://github.com/go-sonic/default-theme-anatole</a></li>
-	<li>开源地址：<a href="https://github.com/go-sonic/sonic" target="_blank">https://github.com/go-sonic/sonic</a></li>
+	<li>开源地址：<a href="https://github.com/aaro-n/sonic" target="_blank">https://github.com/aaro-n/sonic</a></li>
 	</ul>
 	<p>在使用过程中，有任何问题都可以通过以上链接找寻答案，或者联系我们。</p>
 	<blockquote>

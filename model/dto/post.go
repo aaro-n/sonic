@@ -1,6 +1,6 @@
 package dto
 
-import "github.com/go-sonic/sonic/consts"
+import "github.com/aaro-n/sonic/consts"
 
 type Post struct {
 	PostMinimal

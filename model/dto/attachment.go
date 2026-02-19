@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"github.com/go-sonic/sonic/consts"
+	"github.com/aaro-n/sonic/consts"
 )
 
 type AttachmentDTO struct {

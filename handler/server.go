@@ -12,16 +12,16 @@ import (
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 
-	"github.com/go-sonic/sonic/config"
-	"github.com/go-sonic/sonic/event"
-	"github.com/go-sonic/sonic/handler/admin"
-	"github.com/go-sonic/sonic/handler/content"
-	"github.com/go-sonic/sonic/handler/content/api"
-	"github.com/go-sonic/sonic/handler/middleware"
-	"github.com/go-sonic/sonic/model/dto"
-	"github.com/go-sonic/sonic/service"
-	"github.com/go-sonic/sonic/template"
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/config"
+	"github.com/aaro-n/sonic/event"
+	"github.com/aaro-n/sonic/handler/admin"
+	"github.com/aaro-n/sonic/handler/content"
+	"github.com/aaro-n/sonic/handler/content/api"
+	"github.com/aaro-n/sonic/handler/middleware"
+	"github.com/aaro-n/sonic/model/dto"
+	"github.com/aaro-n/sonic/service"
+	"github.com/aaro-n/sonic/template"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 type Server struct {

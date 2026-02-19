@@ -1,8 +1,8 @@
 package event
 
 import (
-	"github.com/go-sonic/sonic/consts"
-	"github.com/go-sonic/sonic/model/entity"
+	"github.com/aaro-n/sonic/consts"
+	"github.com/aaro-n/sonic/model/entity"
 )
 
 type Event interface {

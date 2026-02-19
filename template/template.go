@@ -14,8 +14,8 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"go.uber.org/zap"
 
-	"github.com/go-sonic/sonic/event"
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/event"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 type Template struct {

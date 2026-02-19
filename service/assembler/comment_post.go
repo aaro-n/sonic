@@ -3,9 +3,9 @@ package assembler
 import (
 	"context"
 
-	"github.com/go-sonic/sonic/model/entity"
-	"github.com/go-sonic/sonic/model/vo"
-	"github.com/go-sonic/sonic/service"
+	"github.com/aaro-n/sonic/model/entity"
+	"github.com/aaro-n/sonic/model/vo"
+	"github.com/aaro-n/sonic/service"
 )
 
 type PostCommentAssembler interface {

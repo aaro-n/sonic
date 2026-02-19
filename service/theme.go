@@ -4,7 +4,7 @@ import (
 	"context"
 	"mime/multipart"
 
-	"github.com/go-sonic/sonic/model/dto"
+	"github.com/aaro-n/sonic/model/dto"
 )
 
 type ThemeService interface {

@@ -3,12 +3,12 @@ package admin
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/go-sonic/sonic/handler/binding"
-	"github.com/go-sonic/sonic/model/dto"
-	"github.com/go-sonic/sonic/model/param"
-	"github.com/go-sonic/sonic/service"
-	"github.com/go-sonic/sonic/util"
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/handler/binding"
+	"github.com/aaro-n/sonic/model/dto"
+	"github.com/aaro-n/sonic/model/param"
+	"github.com/aaro-n/sonic/service"
+	"github.com/aaro-n/sonic/util"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 type AttachmentHandler struct {

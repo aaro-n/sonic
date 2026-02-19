@@ -7,7 +7,7 @@ package entity
 import (
 	"time"
 
-	"github.com/go-sonic/sonic/consts"
+	"github.com/aaro-n/sonic/consts"
 )
 
 const TableNamePost = "post"

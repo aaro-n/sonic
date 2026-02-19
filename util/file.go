@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 func ZipFile(dst string, srcs ...string) (err error) {

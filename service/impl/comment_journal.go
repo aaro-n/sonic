@@ -3,11 +3,11 @@ package impl
 import (
 	"context"
 
-	"github.com/go-sonic/sonic/consts"
-	"github.com/go-sonic/sonic/dal"
-	"github.com/go-sonic/sonic/model/entity"
-	"github.com/go-sonic/sonic/model/param"
-	"github.com/go-sonic/sonic/service"
+	"github.com/aaro-n/sonic/consts"
+	"github.com/aaro-n/sonic/dal"
+	"github.com/aaro-n/sonic/model/entity"
+	"github.com/aaro-n/sonic/model/param"
+	"github.com/aaro-n/sonic/service"
 )
 
 type journalCommentServiceImpl struct {

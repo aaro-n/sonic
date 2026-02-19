@@ -1,6 +1,6 @@
 package vo
 
-import "github.com/go-sonic/sonic/model/dto"
+import "github.com/aaro-n/sonic/model/dto"
 
 type CategoryVO struct {
 	dto.CategoryDTO

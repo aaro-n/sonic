@@ -5,9 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/go-sonic/sonic/model/param"
-	"github.com/go-sonic/sonic/service"
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/model/param"
+	"github.com/aaro-n/sonic/service"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 type OptionHandler struct {

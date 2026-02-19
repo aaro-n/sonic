@@ -3,7 +3,7 @@ package theme
 import (
 	"go.uber.org/fx"
 
-	"github.com/go-sonic/sonic/injection"
+	"github.com/aaro-n/sonic/injection"
 )
 
 func init() {

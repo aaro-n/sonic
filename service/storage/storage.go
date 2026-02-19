@@ -4,9 +4,9 @@ import (
 	"context"
 	"mime/multipart"
 
-	"github.com/go-sonic/sonic/consts"
-	"github.com/go-sonic/sonic/model/dto"
-	storageimpl "github.com/go-sonic/sonic/service/storage/impl"
+	"github.com/aaro-n/sonic/consts"
+	"github.com/aaro-n/sonic/model/dto"
+	storageimpl "github.com/aaro-n/sonic/service/storage/impl"
 )
 
 type FileStorage interface {

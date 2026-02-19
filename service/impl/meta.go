@@ -3,10 +3,10 @@ package impl
 import (
 	"context"
 
-	"github.com/go-sonic/sonic/dal"
-	"github.com/go-sonic/sonic/model/dto"
-	"github.com/go-sonic/sonic/model/entity"
-	"github.com/go-sonic/sonic/service"
+	"github.com/aaro-n/sonic/dal"
+	"github.com/aaro-n/sonic/model/dto"
+	"github.com/aaro-n/sonic/model/entity"
+	"github.com/aaro-n/sonic/service"
 )
 
 type metaServiceImpl struct{}

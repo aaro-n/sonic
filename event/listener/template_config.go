@@ -9,14 +9,14 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 
-	"github.com/go-sonic/sonic/config"
-	"github.com/go-sonic/sonic/consts"
-	"github.com/go-sonic/sonic/dal"
-	"github.com/go-sonic/sonic/event"
-	"github.com/go-sonic/sonic/handler"
-	"github.com/go-sonic/sonic/model/property"
-	"github.com/go-sonic/sonic/service"
-	"github.com/go-sonic/sonic/template"
+	"github.com/aaro-n/sonic/config"
+	"github.com/aaro-n/sonic/consts"
+	"github.com/aaro-n/sonic/dal"
+	"github.com/aaro-n/sonic/event"
+	"github.com/aaro-n/sonic/handler"
+	"github.com/aaro-n/sonic/model/property"
+	"github.com/aaro-n/sonic/service"
+	"github.com/aaro-n/sonic/template"
 )
 
 type TemplateConfigListener struct {

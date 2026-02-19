@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/go-sonic/sonic/model/dto"
+	"github.com/aaro-n/sonic/model/dto"
 )
 
 type StatisticService interface {

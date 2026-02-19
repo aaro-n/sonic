@@ -1,4 +1,4 @@
-module github.com/go-sonic/sonic
+module github.com/aaro-n/sonic
 
 go 1.21
 
@@ -119,3 +119,5 @@ require (
 	gorm.io/datatypes v1.2.0 // indirect
 	gorm.io/hints v1.1.2 // indirect
 )
+
+replace github.com/go-sonic/sonic => github.com/aaro-n/sonic v1.0.0

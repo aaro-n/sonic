@@ -9,9 +9,9 @@ import (
 	"github.com/pquerna/otp/totp"
 	"github.com/yeqown/go-qrcode"
 
-	"github.com/go-sonic/sonic/consts"
-	"github.com/go-sonic/sonic/service"
-	"github.com/go-sonic/sonic/util/xerr"
+	"github.com/aaro-n/sonic/consts"
+	"github.com/aaro-n/sonic/service"
+	"github.com/aaro-n/sonic/util/xerr"
 )
 
 type baseMFAServiceImpl struct{}
