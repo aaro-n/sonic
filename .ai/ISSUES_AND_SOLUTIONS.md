@@ -95,35 +95,71 @@
 
 ---
 
-### 问题5: 动态module路径替换复杂性
+### 问题5: 阿里云OSS中文文件名无法打开
 
 **问题描述**:
-- 用户希望module路径能自动根据fork仓库地址变化
-- 提议使用占位符系统，在构建时动态替换
+- 用户上传包含中文名的图片到阿里云OSS
+- 文件上传成功并生成了正确的URL
+- 但访问时报错：`NoSuchKey` - 指定的key不存在
 
-**设计过程**:
-1. ❌ 尝试1：创建脚本读取git remote，根据当前module替换（多层fork兼容性差）
-2. ❌ 尝试2：改进脚本实现多层fork支持，但复杂度高，维护困难
-3. ✅ 最终决定：使用占位符配置文件系统
-   - 创建 `scripts/MODULE_CONFIG` 配置文件
-   - 创建 `scripts/setup-module.sh` 脚本
-   - Dockerfile在构建前自动运行脚本
+**根本原因**:
+- 代码中使用 `url.JoinPath()` 生成文件的相对路径
+- `url.JoinPath()` 会自动对中文字符进行URL编码
+- **问题链路**:
+  1. 文件名：`最近的几次打车.jpg`
+  2. `url.JoinPath()` 编码后：`%E6%9C%80%E8%BF%91%E7%9A%84%E5%87%A0%E6%AC%A1%E6%89%93%E8%BD%A6.jpg`
+  3. **上传到OSS时，已编码的路径被作为Object Key上传**（这是错误的！）
+  4. 访问时URL再次被编码
+  5. OSS中存储的Key是编码版本，但访问要求匹配原始Key，所以报NoSuchKey
 
-**反馈和调整**:
-- ❌ 用户认为太复杂，不需要多层fork支持
-- ✅ 用户决定保留硬编码方案：`github.com/aaro-n/sonic`
-- ✅ 撤销所有动态替换代码，回到简洁硬编码
+**解决方案**:
+1. ✅ 分离路径生成的两个用途：
+   - **OSS对象Key**: 需要原始未编码的路径
+   - **HTTP访问URL**: 需要URL编码的路径
+2. ✅ 修改 `url_file_descriptor.getRelativePath()` 返回未编码的原始路径
+3. ✅ `GetFilePath()` 中使用 `url.JoinPath()` 进行适当的URL编码
 
-**提交历史**:
-- `a0a5ee4` - feat: add dynamic module path setup for multi-fork compatibility (已撤销)
-- `8406bb7` - improve: make module update script multi-fork compatible (已撤销)
-- `b188d45` - refactor: implement placeholder-based module path setup system (已撤销)
-- `2a0f85a` - optimize: add date/timestamp tags (回退到此版本)
+**关键修改文件**:
+- `service/storage/impl/url_file_descriptor.go` - 核心修复
+  - `getRelativePath()` 改为: `return f.SubPath + "/" + f.getFullName()` (不使用url.JoinPath)
+- `service/storage/impl/aliyun.go` - 添加注释说明GetFilePath中URL编码
+- `service/storage/impl/minio.go` - 同样添加注释
 
-**经验教训**:
-- ⚠️ 不要过度设计，保持简洁
-- ⚠️ 在实现复杂功能前要充分确认需求
-- ✅ 及时撤销错误的设计，保持代码整洁
+**关键提交**:
+- `c25c98e` - fix: OSS Chinese filename encoding issue
+
+**工作流程修复前后对比**:
+```
+❌ 修复前:
+getRelativePath() 使用url.JoinPath → 返回已编码路径 → 
+PutObject(已编码路径) → OSS存储已编码Key → 
+访问时URL再编码 → 找不到Key → NoSuchKey错误
+
+✅ 修复后:
+getRelativePath() 返回未编码路径 → 
+PutObject(未编码路径) → OSS存储原始中文Key → 
+GetFilePath()使用url.JoinPath进行编码 → 
+返回正确编码的HTTP URL → 成功访问
+```
+
+**涉及的存储方式**:
+- ✅ 阿里云OSS - 已修复
+- ✅ MinIO - 已修复
+- ℹ️ 本地存储 - 使用localFileDescriptor，不受影响
+
+**验证**:
+```python
+# Python验证的编码逻辑
+rawPath = "sonic/最近的几次打车.jpg"
+httpURL = "https://cf-image.676232.xyz" + "/" + quote(rawPath, safe='/')
+# 结果: https://cf-image.676232.xyz/sonic/%E6%9C%80%E8%BF%91%E7%9A%84%E5%87%A0%E6%AC%A1%E6%89%93%E8%BD%A6.jpg
+# ✓ 完全正确匹配用户反馈
+```
+
+**注意事项**:
+- ⚠️ 这是编码分离的经典问题：存储Key需要原始形式，HTTP URL需要编码形式
+- ⚠️ 所有基于urlFileDescriptor的存储方式都需要遵循这个原则
+- ⚠️ 未来如果添加其他云存储，务必记住这一点
 
 ---
 
@@ -232,7 +268,9 @@
 - [ ] 验证Docker镜像在所有平台上的构建成功
 - [ ] 测试Docker镜像的实际运行
 - [ ] 更新文档，说明Docker镜像的使用方式
+- [x] 修复OSS中文文件名编码问题（2026-02-20 完成）
+- [x] 重新发布v1.1.5版本（2026-02-20 完成）
 
 ---
 
-最后更新: 2026-02-20 13:30
+最后更新: 2026-02-20 19:30

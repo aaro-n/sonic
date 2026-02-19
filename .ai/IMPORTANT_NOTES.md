@@ -120,6 +120,18 @@ feat/new_theme: 新主题功能分支
 **原因**: 工作流中tags定义有误
 **解决**: 检查工作流中的tags格式，确保与预期一致
 
+### 5. 中文文件名编码问题（OSS/MinIO）
+**症状**: 上传中文名文件到OSS，访问时报 `NoSuchKey` 错误
+**原因**: 
+- 使用 `url.JoinPath()` 生成Object Key时，自动进行了URL编码
+- 将已编码的路径作为Key存储到OSS
+- 访问时URL再次编码，导致Key不匹配
+**解决**: 
+- 分离编码逻辑：storage层的getRelativePath()返回**未编码**的原始路径
+- GetFilePath()中使用url.JoinPath()对路径进行URL编码
+- 参考: service/storage/impl/url_file_descriptor.go 的修改
+- 关键：OSS/MinIO需要原始Key，HTTP访问需要编码URL
+
 ---
 
 ## AI助手行为规范
@@ -174,4 +186,4 @@ git tag -d v1.1.5 && git push origin --delete v1.1.5 && git tag v1.1.5 && git pu
 
 ---
 
-最后更新: 2026-02-20 13:30
+最后更新: 2026-02-20 19:30
