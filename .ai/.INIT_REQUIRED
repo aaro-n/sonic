@@ -1,0 +1,30 @@
+🚨 INITIALIZATION REQUIRED FOR NEW SESSIONS 🚨
+
+This file marks that the .ai/ knowledge base MUST be initialized before any work starts.
+
+【强制要求】
+When a new conversation/session starts, you MUST:
+
+1. ✅ Read this file (.ai/.INIT_REQUIRED)
+2. ✅ Read .ai/MUST_READ_FIRST.md
+3. ✅ Read .ai/PROJECT_OVERVIEW.md
+4. ✅ Read .ai/IMPORTANT_NOTES.md
+5. ✅ Read .ai/ISSUES_AND_SOLUTIONS.md
+
+ONLY AFTER reading all above files, proceed with any tasks.
+
+【强制规则 - NO EXCEPTIONS】
+- Every code modification MUST be accompanied by .ai/ updates
+- Every commit MUST include .ai/ changes if code was modified
+- Knowledge base is the source of truth for project state
+
+【如果忽视此文件的后果】
+❌ Missing critical information about previous problems
+❌ Repeating same mistakes already solved
+❌ Breaking established project conventions
+❌ Incomplete commits without knowledge base updates
+
+【File Verification】
+Last Updated: 2026-02-20 19:30
+This file should NOT be deleted or modified
+If this file exists, initialization is mandatory

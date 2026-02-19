@@ -100,6 +100,28 @@ See: https://hub.docker.com/r/gosonic/sonic
 - [ ] Plugin(base on Wasm)
 - [ ] Use new web framework([Hertz](https://github.com/cloudwego/hertz))
 
+## 🤖 AI Assistant Knowledge Base
+
+This project includes a hidden `.ai/` folder containing critical information for AI assistants and developers:
+
+**For AI Assistants (GitHub Copilot, Claude, etc.):**
+- 🚨 **MANDATORY**: Read `.ai/.INIT_REQUIRED` file at the start of every new conversation
+- 📋 **THEN READ**: `.ai/MUST_READ_FIRST.md` for behavioral rules
+- 📚 **REFERENCE**: `.ai/PROJECT_OVERVIEW.md`, `.ai/IMPORTANT_NOTES.md`, `.ai/ISSUES_AND_SOLUTIONS.md`
+
+**Key Rules:**
+- Every code modification MUST update `.ai/ISSUES_AND_SOLUTIONS.md`
+- Every commit involving code changes MUST include `.ai/` updates
+- NO EXCEPTIONS - even small changes require knowledge base updates
+
+**Why?** To prevent:
+- ❌ Repeating mistakes already solved
+- ❌ Missing critical context about the project
+- ❌ Incomplete commits without documenting changes
+- ❌ Breaking established conventions
+
+**For Human Contributors:** The `.ai/` folder is a knowledge base maintained by contributors to help AI assistants understand project context and constraints. You can reference it too!
+
 ## Contributing
 
 Feel free to dive in! [Open an issue](https://github.com/go-sonic/sonic/issues) or submit PRs.
