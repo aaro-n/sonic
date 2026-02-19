@@ -177,7 +177,6 @@ func (l *LocalFileStorage) GetFilePath(ctx context.Context, relativePath string)
 	if blogBaseURL == "" {
 		fullPath, _ = url.JoinPath("/", relativePath)
 	}
-	fullPath, _ = url.PathUnescape(fullPath)
 	return fullPath, nil
 }
 

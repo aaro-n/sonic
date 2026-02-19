@@ -120,7 +120,6 @@ func (a *Aliyun) GetFilePath(ctx context.Context, relativePath string) (string, 
 		basePath = aliyunClientInstance.Protocol + aliyunClientInstance.Domain
 	}
 	fullPath, _ := url.JoinPath(basePath, relativePath)
-	fullPath, _ = url.PathUnescape(fullPath)
 	return fullPath, nil
 }
 

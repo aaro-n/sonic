@@ -110,7 +110,6 @@ func (m *MinIO) GetFilePath(ctx context.Context, relativePath string) (string, e
 		base = minioClientInstance.FrontBase
 	}
 	fullPath, _ := url.JoinPath(base, relativePath)
-	fullPath, _ = url.PathUnescape(fullPath)
 	return fullPath, nil
 }
 

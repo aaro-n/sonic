@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  sonic:
+    # 使用最新镜像（自动选择合适的平台）
+    image: gosonic/sonic:latest
+    # 或者使用特定版本
+    # image: gosonic/sonic:v1.0.0
+    # 或者从GHCR使用
+    # image: ghcr.io/go-sonic/sonic:latest
+
+    # 容器名称
+    container_name: sonic-blog
+
+    # 端口映射
+    ports:
+      - "8080:8080"
+
+    # 环境变量
+    environment:
+      # 时区设置
+      TZ: Asia/Shanghai
+
+    # 数据持久化
+    volumes:
+      # 应用配置和数据目录
+      - sonic-data:/sonic
+      # 配置文件（可选）
+      # - ./conf:/sonic/conf
+
+    # 容器重启策略
+    restart: unless-stopped
+
+    # 资源限制（可选）
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '1'
+    #     memory: 1G
+    #     reservations:
+    #       cpus: '0.5'
+    #       memory: 512M
+
+    # 日志配置
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/api/admin/v1/api"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # 可选：数据库服务（如果使用MySQL）
+  # mysql:
+  #   image: mysql:8.0
+  #   container_name: sonic-mysql
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root_password
+  #     MYSQL_DATABASE: sonic
+  #     MYSQL_USER: sonic
+  #   MYSQL_PASSWORD: sonic_password
+  #   volumes:
+  #     - mysql-data:/var/lib/mysql
+  #   ports:
+  #     - "3306:3306"
+  #   restart: unless-stopped
+
+volumes:
+  sonic-data:
+    driver: local
+  # mysql-data:
+  #   driver: local
+
+# 网络配置
+networks:
+  default:
+    name: sonic-network
+    driver: bridge
