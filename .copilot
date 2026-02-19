@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# AI Assistant Configuration File
+# This file instructs AI assistants (GitHub Copilot, Claude, etc.) to read and maintain
+# the .ai knowledge base before making any changes to the project.
+
+# READ THIS FIRST
+# ===============
+# Before starting ANY conversation or making ANY code changes:
+# 1. Read .ai/PROJECT_OVERVIEW.md - understand project structure
+# 2. Read .ai/ISSUES_AND_SOLUTIONS.md - know about past problems
+# 3. Read .ai/IMPORTANT_NOTES.md - check critical information
+# 4. Read .ai/README.md - understand the system
+
+# WORKFLOW
+# ========
+# 1. Every new conversation: Read .ai files above
+# 2. Before code changes: Check .ai/IMPORTANT_NOTES.md
+# 3. After completing tasks: Update .ai/ISSUES_AND_SOLUTIONS.md
+# 4. When done: Commit changes with .ai updates
+
+# KEY FILES TO REMEMBER
+# ================
+SONIC_PROJECT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+AI_KNOWLEDGE_BASE="${SONIC_PROJECT_PATH}/.ai"
+
+# These files are the source of truth
+echo "🔍 AI Knowledge Base Location: ${AI_KNOWLEDGE_BASE}"
+echo "📖 Key files:"
+echo "   - PROJECT_OVERVIEW.md: Project structure and info"
+echo "   - ISSUES_AND_SOLUTIONS.md: Problem history and solutions"
+echo "   - IMPORTANT_NOTES.md: Critical notes and commands"
+echo "   - README.md: System usage guide"
+
+# For CI/CD or automated systems
+export AI_KB_PATH="${AI_KNOWLEDGE_BASE}"
