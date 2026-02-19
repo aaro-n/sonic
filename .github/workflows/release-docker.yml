@@ -34,18 +34,23 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set build time
-        run: echo "BUILD_TIME=$(date +%FT%T%z)" >> $GITHUB_ENV
+- name: Set build time and tags
+        run: |
+          echo "BUILD_TIME=$(date +%FT%T%z)" >> $GITHUB_ENV
+          echo "BUILD_DATE=$(date +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "BUILD_TIMESTAMP=$(date +%s)" >> $GITHUB_ENV
 
       - name: Build and push (GHCR)
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/ppc64le,linux/s390x
           push: true
           file: ./scripts/Dockerfile
-          tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+       tags: |
+          ghcr.io/${{ github.repository }}:latest
+       ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+            ghcr.io/${{ github.repository }}:${{ github.ref_name }}-${{ env.BUILD_DATE }}
+            ghcr.io/${{ github.repository }}:${{ github.ref_name }}-${{ env.BUILD_TIMESTAMP }}
           build-args: |
             SONIC_VERSION=${{ github.ref_name }}
             BUILD_COMMIT=${{ github.sha }}
@@ -54,13 +59,15 @@ jobs:
       - name: Build and push (Docker Hub)
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/ppc64le,linux/s390x
           push: true
-          file: ./scripts/Dockerfile
-          tags: |
+      file: ./scripts/Dockerfile
+      tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/sonic:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/sonic:${{ github.ref_name }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/sonic:${{ github.ref_name }}-${{ env.BUILD_DATE }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/sonic:${{ github.ref_name }}-${{ env.BUILD_TIMESTAMP }}
           build-args: |
             SONIC_VERSION=${{ github.ref_name }}
-            BUILD_COMMIT=${{ github.sha }}
+        BUILD_COMMIT=${{ github.sha }}
             BUILD_TIME=${{ env.BUILD_TIME }}
