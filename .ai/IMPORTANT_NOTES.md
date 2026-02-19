@@ -122,6 +122,21 @@ feat/new_theme: 新主题功能分支
 
 ---
 
+## AI助手行为规范
+
+### 🚨 强制规则（MUST DO）
+
+**每次修改代码后，MUST更新.ai文件夹**:
+```
+代码修改完 → 更新 .ai/ISSUES_AND_SOLUTIONS.md
+         → 更新 .ai/IMPORTANT_NOTES.md（如有新发现）
+         → git commit 包含.ai更改
+```
+
+**没有例外**！即使修改很小，也要更新记录。
+
+---
+
 ## 文件监控清单
 
 每次修改代码前都要检查这些文件的内容：
@@ -131,6 +146,11 @@ feat/new_theme: 新主题功能分支
 - [ ] `.github/workflows/release-docker.yml` - 工作流配置是否完整
 - [ ] `.ai/ISSUES_AND_SOLUTIONS.md` - 查看是否有相关的已知问题
 - [ ] `.ai/IMPORTANT_NOTES.md` - 查看是否有特殊注意事项
+
+**修改代码后必须做**:
+- [ ] 立即更新 `.ai/ISSUES_AND_SOLUTIONS.md`
+- [ ] 如有新发现则更新 `.ai/IMPORTANT_NOTES.md`
+- [ ] commit包含.ai文件的更改
 
 ---
 

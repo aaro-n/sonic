@@ -27,7 +27,7 @@
 
 ---
 
-## Before Making Code Changes
+## ⚠️ CRITICAL: Before Making Code Changes
 
 Always check:
 - [ ] Read `.ai/IMPORTANT_NOTES.md` file monitoring checklist
@@ -37,20 +37,53 @@ Always check:
 
 ---
 
+## 🔴 MANDATORY: After Every Code Change
+
+**This is NOT optional - EVERY code modification MUST trigger .ai updates!**
+
+### Step 1: Update `.ai/ISSUES_AND_SOLUTIONS.md`
+```markdown
+### Problem X: [Brief Title]
+**Problem Description**: ...
+**Solution**: ✅ (success) or ❌ (failure/rollback)
+**Files Changed**: [list files]
+**Key Insights**: ...
+```
+
+### Step 2: Update `.ai/IMPORTANT_NOTES.md`
+If you discovered:
+- New common errors
+- New command patterns
+- Changed critical locations
+- Important warnings
+
+### Step 3: Commit with .ai changes
+```bash
+git add -A
+git commit -m "description: change what you did
+docs: update .ai knowledge base"
+```
+
+**IF YOU DON'T UPDATE .AI, THE NEXT AI ASSISTANT WILL REPEAT YOUR MISTAKES!**
+
+---
+
 ## After Completing Tasks
 
-Update the `.ai` folder:
+Update the `.ai` folder IMMEDIATELY:
 1. Update `.ai/ISSUES_AND_SOLUTIONS.md` with:
-   - New problems encountered (if any)
+   - Problems encountered (if any) - 📋
    - Solutions applied (✅ for success, ❌ for failures)
-   - What you learned
-   - Any warnings for future reference
+   - What you learned - 📚
+   - Warnings for future reference - ⚠️
 
 2. Update `.ai/IMPORTANT_NOTES.md` if:
-   - New command patterns discovered
-   - New common errors found
-   - Critical locations changed
-   - Important new insights
+   - New command patterns discovered - 🔧
+   - New common errors found - 🐛
+   - Critical locations changed - 📌
+   - Important new insights - 💡
+
+**This is the payment you owe for the next AI to understand your work!**
 
 ---
 ## The .ai Folder Structure
