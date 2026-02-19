@@ -56,6 +56,8 @@ func (m *MinIO) Upload(ctx context.Context, fileHeader *multipart.FileHeader) (*
 		return nil, xerr.WithStatus(err, xerr.StatusInternalServerError).WithMsg("open upload file error")
 	}
 	defer file.Close()
+	// Use raw path from getRelativePath() - it contains unencoded Chinese characters
+	// which is what MinIO SDK expects for the object key
 	_, err = minioClientInstance.PutObject(ctx, minioClientInstance.BucketName, fd.getRelativePath(), file, fileHeader.Size, minio.PutObjectOptions{})
 	if err != nil {
 		return nil, xerr.WithMsg(err, "upload to minio error").WithStatus(xerr.StatusInternalServerError).WithErrMsgf("err=%v", err)
@@ -109,6 +111,7 @@ func (m *MinIO) GetFilePath(ctx context.Context, relativePath string) (string, e
 	if minioClientInstance.FrontBase != "" {
 		base = minioClientInstance.FrontBase
 	}
+	// Use url.JoinPath to properly encode Chinese characters and special characters for HTTP URLs
 	fullPath, _ := url.JoinPath(base, relativePath)
 	return fullPath, nil
 }

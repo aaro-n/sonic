@@ -62,6 +62,8 @@ func (a *Aliyun) Upload(ctx context.Context, fileHeader *multipart.FileHeader) (
 		return nil, xerr.WithStatus(err, xerr.StatusInternalServerError).WithMsg("open upload file error")
 	}
 	defer file.Close()
+	// Use raw path without URL encoding for OSS object key
+	// The path will be URL encoded when generating the access URL in GetFilePath
 	err = aliyunClientInstance.Bucket.PutObject(fd.getRelativePath(), file)
 	if err != nil {
 		return nil, xerr.WithMsg(err, "upload to aliyun oss error: "+err.Error()).WithStatus(xerr.StatusInternalServerError)
@@ -119,6 +121,8 @@ func (a *Aliyun) GetFilePath(ctx context.Context, relativePath string) (string, 
 	if aliyunClientInstance.Domain != "" {
 		basePath = aliyunClientInstance.Protocol + aliyunClientInstance.Domain
 	}
+	// Use url.JoinPath here to properly encode Chinese characters and special characters
+	// The relativePath comes from urlFileDescriptor and contains raw Chinese characters
 	fullPath, _ := url.JoinPath(basePath, relativePath)
 	return fullPath, nil
 }

@@ -70,8 +70,14 @@ func (f *urlFileDescriptor) getFullPath() string {
 }
 
 func (f *urlFileDescriptor) getRelativePath() string {
-	relativePath, _ := url.JoinPath(f.SubPath, f.getFullName())
-	return relativePath
+	// Return raw path without URL encoding - will be encoded by GetFilePath for HTTP URLs
+	// This is critical for OSS/cloud storage to handle Chinese filenames correctly
+	if f.SubPath == "" {
+		return f.getFullName()
+	}
+	// Use forward slash directly without url.JoinPath to avoid encoding
+	// url.JoinPath encodes Chinese characters which breaks OSS object keys
+	return f.SubPath + "/" + f.getFullName()
 }
 
 func (f *urlFileDescriptor) getExtensionName() string {
