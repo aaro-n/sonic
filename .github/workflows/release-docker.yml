@@ -54,12 +54,12 @@ jobs:
       - name: Build and push (Docker Hub)
         uses: docker/build-push-action@v5
       with:
-     platforms: linux/amd64,linux/arm64
+        platforms: linux/amd64,linux/arm64
         push: true
-          file: ./scripts/Dockerfile
-          tags: |
-       ${{ secrets.DOCKERHUB_USERNAME }}/sonic:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/sonic:${{ github.ref_name }}
-          build-args: |
-            SONIC_VERSION=${{ github.ref_name }}
-            BUILD_COMMIT=${{ github.sha }}
+        file: ./scripts/Dockerfile
+        tags: |
+          ${{ secrets.DOCKERHUB_USERNAME }}/sonic:latest
+          ${{ secrets.DOCKERHUB_USERNAME }}/sonic:${{ github.ref_name }}
+        build-args: |
+          SONIC_VERSION=${{ github.ref_name }}
+          BUILD_COMMIT=${{ github.sha }}
