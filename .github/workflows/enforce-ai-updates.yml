@@ -10,40 +10,45 @@ on:
 
 jobs:
   check-ai-updates:
-    runs-on: ubuntu-latest
     name: Verify .ai/ Knowledge Base Updates
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      with:
+        with:
           fetch-depth: 0
 
       - name: Check for code modifications without .ai/ updates
+        shell: bash
         run: |
+          set -euo pipefail
+
           # Get the list of changed files in this commit/PR
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            CHANGED_FILES=$(git diff origin/${{ github.base_ref }}...HEAD --name-only)
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            # 更稳妥：直接用 PR 的 base/head sha
+            CHANGED_FILES=$(git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}")
           else
-        # For push events, compare with previous commit
-            if [ "${{ github.event.before }}" == "000000000000" ]; then
-            # Initial commit
+            # For push events, compare with previous commit
+            if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+              # Initial commit on a new branch
               CHANGED_FILES=$(git ls-tree -r --name-only HEAD)
             else
-              CHANGED_FILES=$(git diff ${{ github.event.before }}..HEAD --name-only)
+              CHANGED_FILES=$(git diff --name-only "${{ github.event.before }}" HEAD)
             fi
           fi
 
           # Check if any code files were changed
           CODE_FILES=$(echo "$CHANGED_FILES" | grep -E '\.(go|yaml|yml|mod|sum)$' || true)
-          
-       # Check if .ai/ files were updated
-          AI_FILES=$(echo "$CHANGED_FILES" | grep '^\.ai/' || true)
+
+          # Check if .ai/ files were updated
+          AI_FILES=$(echo "$CHANGED_FILES" | grep -E '^\.(ai)/' || true)
+          # 更简单也可以：grep '^\.ai/'；上面这种写法只是避免转义困扰
 
           if [ -n "$CODE_FILES" ] && [ -z "$AI_FILES" ]; then
-        echo "❌ Code modified but .ai/ knowledge base not updated!"
+            echo "❌ Code modified but .ai/ knowledge base not updated!"
             echo ""
-          echo "Modified code files:"
+            echo "Modified code files:"
             echo "$CODE_FILES" | sed 's/^/  - /'
             echo ""
             echo "Please update:"
@@ -62,48 +67,53 @@ jobs:
             echo ""
             echo "AI knowledge base updates:"
             echo "$AI_FILES" | sed 's/^/  - /'
+          else
+            echo "ℹ️ No matching code file changes detected; skipping .ai/ update enforcement."
           fi
 
   verify-ai-files-exist:
+    name: Verify Critical .ai/ Files Exist
     runs-on: ubuntu-latest
-  name: Verify Critical .ai/ Files Exist
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Check critical .ai/ files
+        shell: bash
         run: |
-       CRITICAL_FILES=(
-         ".ai/.INIT_REQUIRED"
+          set -euo pipefail
+
+          CRITICAL_FILES=(
+            ".ai/.INIT_REQUIRED"
             ".ai/MUST_READ_FIRST.md"
-          ".ai/PROJECT_OVERVIEW.md"
-       ".ai/IMPORTANT_NOTES.md"
-       ".ai/ISSUES_AND_SOLUTIONS.md"
+            ".ai/PROJECT_OVERVIEW.md"
+            ".ai/IMPORTANT_NOTES.md"
+            ".ai/ISSUES_AND_SOLUTIONS.md"
           )
 
           MISSING=()
-          
-      for file in "${CRITICAL_FILES[@]}"; do
-            if [ ! -f "$file" ]; then
-         MISSING+=("$file")
-            fi
-      done
 
-          if [ ${#MISSING[@]} -gt 0 ]; then
+          for file in "${CRITICAL_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              MISSING+=("$file")
+            fi
+          done
+
+          if [ "${#MISSING[@]}" -gt 0 ]; then
             echo "❌ ERROR: Missing critical .ai/ files:"
             for file in "${MISSING[@]}"; do
-           echo "  - $file"
+              echo "  - $file"
             done
             exit 1
           fi
 
           echo "✅ All critical .ai/ files are present"
-          
+
           # Check if .INIT_REQUIRED file is not empty
           if [ ! -s ".ai/.INIT_REQUIRED" ]; then
             echo "❌ ERROR: .ai/.INIT_REQUIRED file is empty!"
-         exit 1
-       fi
-          
-          echo "✅ All .ai/ files have content"
+            exit 1
+          fi
+
+          echo "✅ .ai/.INIT_REQUIRED has content"
