@@ -163,7 +163,7 @@
                 {{range $category := $cagegorys}}
                     <li>
                         <div class="T1 pull-left"><a
-                                    href="{{- if $.globalAbsolutePathEnabled}}{{$.blog_url}}{{end}}{{$category.FullPath}}"
+                                    href="{{$category.FullPath}}"
                                     title="{{$category.Name}}">{{$category.Name}} | {{$.blog_title}}</a></div>
                         <div class="T2 pull-right">{{unix_milli_time_format "2006-01-02" $category.CreateTime}}</div>
                         <div class="T3 pull-right">daily</div>
@@ -182,7 +182,7 @@
                 {{range $tag := $tags}}
                     <li>
                         <div class="T1 pull-left"><a
-                                    href="{{- if $.globalAbsolutePathEnabled}}{{$.blog_url}}{{end}}{{$tag.FullPath}}"
+                                    href="{{$tag.FullPath}}"
                                     title="{{$tag.Name}}">{{$tag.Name}} | {{$.blog_title}}</a></div>
                         <div class="T2 pull-right">{{unix_milli_time_format "2006-01-02" $tag.CreateTime}}</div>
                         <div class="T3 pull-right">daily</div>

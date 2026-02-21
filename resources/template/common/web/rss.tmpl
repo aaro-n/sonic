@@ -8,9 +8,9 @@
                 <title>{{.blog_title}}</title>
             {{end}}
             {{if .category}}
-                <link>{{.category.FullPath}}</link>
+           <link>{{if $.globalAbsolutePathEnabled}}{{.category.FullPath}}{{else}}{{.blog_url}}{{.category.FullPath}}{{end}}</link>
             {{else}}
-                <link>{{.blog_url}}</link>
+              <link>{{.blog_url}}</link>
             {{end}}
             {{if .category}}
                 {{if .category.Description}}
@@ -29,7 +29,7 @@
                         <title>
                             <![CDATA[{{$post.Title}}]]>
                         </title>
-                        <link>{{- if $.globalAbsolutePathEnabled}}{{$.blog_url}}{{end}}{{$post.FullPath}}</link>
+                              <link>{{if $.globalAbsolutePathEnabled}}{{$post.FullPath}}{{else}}{{.blog_url}}{{$post.FullPath}}{{end}}</link>
                         <description>
                             {{- if (eq $.options.rss_content_type "full") -}}
                                 <![CDATA[{{$post.Content}}]]>

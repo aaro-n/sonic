@@ -109,17 +109,6 @@ func (b basePostServiceImpl) buildPostFullPath(ctx context.Context, post *entity
 	dayStr := util.IfElse(month < 10, "0"+strconv.Itoa(day), strconv.Itoa(day)).(string)
 
 	fullPath := strings.Builder{}
-	isEnabled, err := b.OptionService.IsEnabledAbsolutePath(ctx)
-	if err != nil {
-		return "", err
-	}
-	if isEnabled {
-		blogBaseURL, err := b.OptionService.GetBlogBaseURL(ctx)
-		if err != nil {
-			return "", err
-		}
-		fullPath.WriteString(blogBaseURL)
-	}
 	fullPath.WriteString("/")
 	switch consts.PostPermalinkType(postPermaLinkType.(string)) {
 	case consts.PostPermalinkTypeDefault:
@@ -175,17 +164,6 @@ func (b basePostServiceImpl) buildSheetFullPath(ctx context.Context, sheet *enti
 	}
 
 	fullPath := strings.Builder{}
-	isEnabled, err := b.OptionService.IsEnabledAbsolutePath(ctx)
-	if err != nil {
-		return "", err
-	}
-	if isEnabled {
-		blogBaseURL, err := b.OptionService.GetBlogBaseURL(ctx)
-		if err != nil {
-			return "", err
-		}
-		fullPath.WriteString(blogBaseURL)
-	}
 	fullPath.WriteString("/")
 	switch consts.SheetPermaLinkType(sheetPermaLinkType.(string)) {
 	case consts.SheetPermaLinkTypeSecondary:
