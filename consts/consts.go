@@ -42,7 +42,7 @@ const (
 var (
 	StartTime       time.Time = time.Now()
 	DatabaseVersion string
-	SonicVersion    = "v1.0.0"
+	SonicVersion    = "v1.1.6"
 	BuildTime       string
 	BuildCommit     string
 )
