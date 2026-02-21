@@ -166,14 +166,6 @@ func (c categoryServiceImpl) ConvertToCategoryDTO(ctx context.Context, e *entity
 
 func (c categoryServiceImpl) ConvertToCategoryDTOs(ctx context.Context, categories []*entity.Category) ([]*dto.CategoryDTO, error) {
 	result := make([]*dto.CategoryDTO, len(categories))
-	isEnabled, err := c.OptionService.IsEnabledAbsolutePath(ctx)
-	if err != nil {
-		return nil, err
-	}
-	blogBaseURL, err := c.OptionService.GetBlogBaseURL(ctx)
-	if err != nil {
-		return nil, err
-	}
 	categoryPrefix, err := c.OptionService.GetOrByDefaultWithErr(ctx, property.CategoriesPrefix, "categories")
 	if err != nil {
 		return nil, err
@@ -195,9 +187,6 @@ func (c categoryServiceImpl) ConvertToCategoryDTOs(ctx context.Context, categori
 		categoryDTO.Priority = category.Priority
 
 		fullPath := strings.Builder{}
-		if isEnabled {
-			fullPath.WriteString(blogBaseURL)
-		}
 		fullPath.WriteString("/")
 		fullPath.WriteString(categoryPrefix.(string))
 		fullPath.WriteString("/")
