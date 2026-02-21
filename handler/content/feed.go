@@ -172,7 +172,8 @@ func (f *FeedHandler) getLastModifiedTime(posts []*entity.Post) time.Time {
 	return lastModifiedTime
 }
 
-var xmlInValidChar = regexp.MustCompile("[\x00-\x1F\x7F]")
+// 匹配无效的XML字符，但保留换行符(\x0A)和制表符(\x09)以保持代码格式
+var xmlInValidChar = regexp.MustCompile("[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]")
 
 func (f *FeedHandler) buildPost(ctx context.Context, posts []*entity.Post) ([]*vo.PostDetailVO, error) {
 	postDetailVOs, err := f.PostAssembler.ConvertToDetailVOs(ctx, posts)

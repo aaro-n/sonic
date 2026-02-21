@@ -273,4 +273,60 @@ httpURL = "https://cf-image.676232.xyz" + "/" + quote(rawPath, safe='/')
 
 ---
 
-最后更新: 2026-02-20 19:30
+## 当前会话（2026-02-22）
+
+### 问题6: RSS源代码块格式显示不正常
+
+**问题描述**:
+- 用户Markdown文章中包含代码块
+- 网页端显示正常，格式完整
+- 但RSS/Atom源中，代码块内容全部挤在一起，没有换行和缩进
+
+**根本原因**:
+- `handler/content/feed.go` 中的 `xmlInValidChar` 正则表达式移除了**所有控制字符**
+- 移除的范围包括：`[\x00-\x1F\x7F]`
+- 这导致换行符 `\x0A` 和制表符 `\x09` 也被删除
+- RSS阅读器收到的代码块没有换行和缩进，显示为一长行
+
+**解决方案**:
+1. ✅ 修改正则表达式，**保留换行符和制表符**
+2. ✅ 新正则: `[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]`
+3. ✅ 保留字符:
+   - `\x09` (制表符 TAB)
+   - `\x0A` (换行符 LF)  
+   - `\x0D` (回车符 CR)
+
+**关键修改文件**:
+- `handler/content/feed.go` 第176行
+
+**工作流程对比**:
+```
+❌ 修复前:
+代码块: "cat > ~/.web-ssh.sh\n#!/bin/bash\nif..."
+→ xmlInValidChar移除\n → "cat > ~/.web-ssh.sh#!/bin/bashif..."
+→ RSS源显示全部挤在一起
+
+✅ 修复后:
+代码块: "cat > ~/.web-ssh.sh\n#!/bin/bash\nif..."
+→ xmlInValidChar保留\n和\t → "cat > ~/.web-ssh.sh\n#!/bin/bash\nif..."
+→ RSS源正确显示格式化代码
+```
+
+**验证**:
+- ✅ 编译通过，无错误
+- ✅ 正则表达式改进验证通过
+- ✅ 不影响其他功能（xmlInValidChar仅在feed.go中使用）
+- ✅ XML兼容性：保留的字符都是XML有效字符
+
+**涉及的端点**:
+- `/rss` 和 `/rss.xml`
+- `/atom` 和 `/atom.xml`
+- `/feed/categories/:slug` 和 `/atom/categories/:slug`
+- `/sitemap.xml` 和 `/sitemap.html`
+
+**关键提交**:
+- (待提交) fix: RSS源代码块格式保留换行符和缩进
+
+---
+
+最后更新: 2026-02-22 12:00

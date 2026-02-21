@@ -186,6 +186,44 @@ git tag -d v1.1.5 && git push origin --delete v1.1.5 && git tag v1.1.5 && git pu
 
 ---
 
+## RSS/Feed相关
+
+### 关键文件
+- **feed.go**: `handler/content/feed.go` - RSS/Atom生成器
+- **RSS模板**: `resources/template/common/web/rss.tmpl`
+- **Atom模板**: `resources/template/common/web/atom.tmpl`
+
+### xmlInValidChar正则表达式
+**位置**: `handler/content/feed.go` 第176行
+**当前值**:
+```go
+var xmlInValidChar = regexp.MustCompile("[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]")
+```
+
+**用途**: 清理Content和Summary中的无效XML控制字符，但保留：
+- `\x09` (制表符 TAB) - 用于代码缩进
+- `\x0A` (换行符 LF) - 用于代码换行
+- `\x0D` (回车符 CR) - Windows换行支持
+
+**修改时注意**:
+- ⚠️ 不要删除制表符和换行符，否则RSS源代码块格式破坏
+- ⚠️ 保留字符必须是XML有效字符
+- ⚠️ buildPost函数中同时处理Content和Summary字段
+
+### buildPost函数
+**被调用的场景**:
+1. Atom() - 生成主RSS源
+2. CategoryAtom() - 分类RSS源
+3. SitemapXML() - XML sitemap
+4. SitemapHTML() - HTML sitemap
+
+**修改时验证**:
+- ✅ 编译通过
+- ✅ RSS/Atom输出正常（CDATA包装）
+- ✅ 代码块格式完整（包含换行和缩进）
+
+---
+
 最后更新: 2026-02-20 20:00
 
 ---
